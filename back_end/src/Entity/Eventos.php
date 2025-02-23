@@ -33,6 +33,9 @@ class Eventos
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $fecha = null;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $hora = null;
+
     /**
      * @var Collection<int, Comentarios>
      */
@@ -97,6 +100,30 @@ class Eventos
         return $this;
     }
 
+    public function getFecha(): ?\DateTimeInterface
+    {
+        return $this->fecha;
+    }
+
+    public function setFecha(\DateTimeInterface $fecha): static
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    public function getHora(): ?\DateTimeInterface
+    {
+        return $this->hora;
+    }
+
+    public function setHora(\DateTimeInterface $hora): static
+    {
+        $this->hora = $hora;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Comentarios>
      */
@@ -118,23 +145,10 @@ class Eventos
     public function removeComentario(Comentarios $comentario): static
     {
         if ($this->comentarios->removeElement($comentario)) {
-            // set the owning side to null (unless already changed)
             if ($comentario->getEvento() === $this) {
                 $comentario->setEvento(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getFecha(): ?\DateTimeInterface
-    {
-        return $this->fecha;
-    }
-
-    public function setFecha(\DateTimeInterface $fecha): static
-    {
-        $this->fecha = $fecha;
 
         return $this;
     }
