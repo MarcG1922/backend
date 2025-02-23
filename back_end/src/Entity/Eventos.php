@@ -27,15 +27,17 @@ class Eventos
     #[ORM\Column(type: Types::TEXT, options: ["columnDefinition" => "LONGTEXT"])]
     private ?string $imagen = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ubicacion = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $fecha = null;
 
     /**
      * @var Collection<int, Comentarios>
      */
     #[ORM\OneToMany(targetEntity: Comentarios::class, mappedBy: 'evento')]
     private Collection $comentarios;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $fecha = null;
 
     public function __construct()
     {
@@ -79,6 +81,18 @@ class Eventos
     public function setImagen(string $imagen): static
     {
         $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    public function getUbicacion(): ?string
+    {
+        return $this->ubicacion;
+    }
+
+    public function setUbicacion(?string $ubicacion): static
+    {
+        $this->ubicacion = $ubicacion;
 
         return $this;
     }
