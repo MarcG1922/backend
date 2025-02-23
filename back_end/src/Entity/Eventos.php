@@ -24,8 +24,9 @@ class Eventos
     #[ORM\Column(length: 255)]
     private ?string $descripcion = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT, options: ["columnDefinition" => "LONGTEXT"])]
     private ?string $imagen = null;
+
 
     /**
      * @var Collection<int, Comentarios>
